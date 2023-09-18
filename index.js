@@ -4,6 +4,7 @@ window.addEventListener("load", () => {
   let gridSize = Math.floor(Math.min(window.innerWidth, window.innerHeight) / 30);
   let runTime;
   let reveal = document.getElementById("reveal");
+  let interval;
 
   const getSquare = (x,y) => {
     if (x < 0 || y < 0 || x >= gridSize || y >= gridSize) return;
@@ -48,12 +49,13 @@ window.addEventListener("load", () => {
       }
       grid.appendChild(tr);
     }
-    setInterval(play, 50);
+    interval = setInterval(play, 50);
   }
 
   function play() {
     if (runTime < 0) {
       reveal.innerHTML = "⚉";
+      clearInterval(interval);
       return;
     }
     runTime--;
